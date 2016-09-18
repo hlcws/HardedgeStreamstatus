@@ -281,7 +281,7 @@ function username(){
 //ENDE editierbare Funktionen
 
 function createSrc(user){
-	var url='https://api.twitch.tv/kraken/streams?channel=';
+	var url='https://api.twitch.tv/kraken/streams?client_id=7cp2u79ikajp77uqe3pa0m7mofisedl&channel=';
 	var callback="jsonp";
 	var list='';
 	for(i=0;i<user.length-1;i++){
