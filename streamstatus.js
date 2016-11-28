@@ -8,7 +8,7 @@
 		// create elements <table> and a <tbody>
 		var tbl     = document.createElement("table");
 		tbl.id="streamTbl";
-
+		// top row
 		var row = document.createElement("tr");
 			var cell=createCell("name","th");
 			row.appendChild(cell);
@@ -26,6 +26,7 @@
 			row.appendChild(cell);
 		tbl.appendChild(row);
 		
+		// rows with data
 		for (var j = 0; j <data.length; j++) {
 			var row = document.createElement("tr");
 
@@ -193,7 +194,7 @@ function aCreate(className,href){
 	var a=document.createElement("a");
 		a.className=className;
 		a.href=href;
-a.target = '_blank';
+		a.target = '_blank';
 	return a;
 }
 
@@ -217,27 +218,30 @@ function createSpanEntryRow(key,value,rowClass,keyClass,valueClass){
 //ANFANG editierbare Funktionen
 
 function regexFilter(data){
-	var patt =new Array(
-		new RegExp("street fighter", "i")
-		,new RegExp("guilty gear","i")
-		,new RegExp("killer instinct","i"),
-new RegExp("king of fighters","i"),
-new RegExp("mortal kombat","i"),
-new RegExp("blazblue","i"),
-new RegExp("tekken","i"),
-new RegExp("capcom","i"),
-new RegExp("dead or alive","i"),
-new RegExp("soul calibur","i"),
-new RegExp("aquapazza","i"),
-new RegExp("arcana heart","i"),
-new RegExp("nitro plus","i"),
-new RegExp("melty blood","i"),
-new RegExp("under night","i"),
-new RegExp("dengeki","i"),
-new RegExp("virtua fighter","i"),
-new RegExp("blade arcus","i"),
-new RegExp("chaos code","i"),
-new RegExp("skullgirls","i")
+	var patt = new Array(
+		new RegExp("street fighter", "i"),
+		new RegExp("guilty gear","i"),
+		new RegExp("killer instinct","i"),
+		new RegExp("king of fighters","i"),
+		new RegExp("mortal kombat","i"),
+		new RegExp("blazblue","i"),
+		new RegExp("tekken","i"),
+		new RegExp("capcom","i"),
+		new RegExp("dead or alive","i"),
+		new RegExp("soul calibur","i"),
+		new RegExp("aquapazza","i"),
+		new RegExp("arcana heart","i"),
+		new RegExp("nitro plus","i"),
+		new RegExp("melty blood","i"),
+		new RegExp("under night","i"),
+		new RegExp("dengeki","i"),
+		new RegExp("virtua fighter","i"),
+		new RegExp("blade arcus","i"),
+		new RegExp("chaos code","i"),
+		new RegExp("skullgirls","i"),
+		new RegExp("windjammers","i"),
+		// catchall
+		new RegExp(".*","i")
 	);
 
 	var obj=new Array();
@@ -372,11 +376,10 @@ function jsonp(data){
 
 	//sortieren nach viewer
 	obj.sort(function(a, b) {
-    return parseInt(b.viewers) - parseInt(a.viewers) ;
+    	return parseInt(b.viewers) - parseInt(a.viewers) ;
 });
 	//die streams werden nochmal gefiltert
 	var filtered=regexFilter(obj);
-
 
 	//var element=document.getElementsByTagName("body")[0];
 	var element=document.getElementById("FANG");
