@@ -1,3 +1,4 @@
+<div id="FANG"></div>
 <script type="text/javascript">function tableCreate(data) {
 		//search if exists than destroy
 		var tbl=document.getElementById("streamTbl");
@@ -239,9 +240,9 @@ function regexFilter(data){
 		new RegExp("blade arcus","i"),
 		new RegExp("chaos code","i"),
 		new RegExp("skullgirls","i"),
-		new RegExp("windjammers","i"),
+		new RegExp("windjammers","i")
 		// catchall
-		new RegExp(".*","i")
+		// new RegExp(".*","i")
 	);
 
 	var obj=new Array();
@@ -318,9 +319,11 @@ function ordne(data){
 
 function divCreate2(elem,data){
 	if(elem==null){
+	console.log("Can't find FANG div");
 		return;
 	}
-	console.log(data);
+	console.log("div found: " & elem);
+	console.log("data: " & data);
 
 	var id_container="streamContainer";
 	var class_streamEntry="streamEntry";
@@ -373,17 +376,15 @@ function divCreate2(elem,data){
 function jsonp(data){
 	// hier passiert das meiste
 	var obj=ordne(data);
-
 	//sortieren nach viewer
 	obj.sort(function(a, b) {
     	return parseInt(b.viewers) - parseInt(a.viewers) ;
 });
 	//die streams werden nochmal gefiltert
 	var filtered=regexFilter(obj);
-
+	console.log(obj);
 	//var element=document.getElementsByTagName("body")[0];
 	var element=document.getElementById("FANG");
-	console.log(element);
 	divCreate2(element,filtered);
 	//divCreate2(element,obj);
 	//var tbl=tableCreate(filtered);
