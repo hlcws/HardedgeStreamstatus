@@ -241,6 +241,11 @@ function regexFilter(data){
 		new RegExp("chaos code","i"),
 		new RegExp("skullgirls","i"),
 		new RegExp("windjammers","i")
+		new RegExp("vampire","i")
+		new RegExp("darkstalker","i")
+		new RegExp("arcsys","i")
+		new RegExp("capcom","i")
+		new RegExp("SNK","i")
 		// catchall
 		// new RegExp(".*","i")
 	);
@@ -282,6 +287,7 @@ function username(){
 		,"mr_biscuits"
 		,"colddog113"
 		,"mrbroken030"
+		,"fightersbw"
 	);
 	return user;
 }
