@@ -240,11 +240,11 @@ function regexFilter(data){
 		new RegExp("blade arcus","i"),
 		new RegExp("chaos code","i"),
 		new RegExp("skullgirls","i"),
-		new RegExp("windjammers","i")
-		new RegExp("vampire","i")
-		new RegExp("darkstalker","i")
-		new RegExp("arcsys","i")
-		new RegExp("capcom","i")
+		new RegExp("windjammers","i"),
+		new RegExp("vampire","i"),
+		new RegExp("darkstalker","i"),
+		new RegExp("arcsys","i"),
+		new RegExp("capcom","i"),
 		new RegExp("SNK","i")
 		// catchall
 		// new RegExp(".*","i")
@@ -304,7 +304,7 @@ function createSrc(user){
 	}
 	list+=user[user.length-1];
 	var src=url+list+"&callback="+callback;
-	return src
+	return src;
 }
 
 function ordne(data){
