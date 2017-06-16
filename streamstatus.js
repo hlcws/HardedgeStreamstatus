@@ -278,7 +278,6 @@ function username(){
 		,"thomsonrult"
 		,"schlossfgc"
 		,"draculasan89"
-		,"gghalibel"
 		,"chargiii" 
 		,"dicktraitor" 
 		,"mdz_jimmy" 
@@ -292,6 +291,7 @@ function username(){
 		,"popisweden"
 		,"grimmzo"
 		,"saltminetv_sfv"
+		,"c0ldmt"
 	);
 	return user;
 }
