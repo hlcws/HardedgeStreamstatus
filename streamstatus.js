@@ -245,7 +245,8 @@ function regexFilter(data){
 		new RegExp("darkstalker","i"),
 		new RegExp("arcsys","i"),
 		new RegExp("capcom","i"),
-		new RegExp("SNK","i")
+		new RegExp("SNK","i"),
+		new RegExp("dragon","i")
 		// catchall
 		// new RegExp(".*","i")
 	);
@@ -290,6 +291,7 @@ function username(){
 		,"fightersbw"
 		,"popisweden"
 		,"grimmzo"
+		,"saltminetv_sfv"
 	);
 	return user;
 }
