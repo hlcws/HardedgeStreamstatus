@@ -292,6 +292,7 @@ function username(){
 		,"grimmzo"
 		,"saltminetv_sfv"
 		,"c0ldmt"
+		,"nthgenmedia"
 	);
 	return user;
 }
