@@ -1,5 +1,4 @@
 <div id="FANG"></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 <script type="text/javascript">function tableCreate(data) {
 		//search if exists than destroy
 		var tbl=document.getElementById("streamTbl");
@@ -247,6 +246,7 @@ function divCreate2(elem,data){
 
 //main func wo das zeug passiert
 function jsonp(data){
+		var widgedContainer=document.getElementById("text-3"); //container which will be hidden if there is no Streams
     // hier passiert das meiste
     var obj=ordne(data);
     //sortieren nach viewer
@@ -255,24 +255,20 @@ function jsonp(data){
     });
     //die streams werden nochmal gefiltert
     var filtered=regexFilter(obj);
+		//debug Begin
+		// debug End
     console.log(obj);
-    //var element=document.getElementsByTagName("body")[0];
+    console.log(filtered.length);
     var element=document.getElementById("FANG");
     divCreate2(element,filtered);
-    //divCreate2(element,obj);
-    //var tbl=tableCreate(filtered);
     console.log("jsonp invoked");
-    
+
     // hide "community streams" if there is nothing to display
-    let $streamContainer = $("#streamContainer");
-    let $widgetContainer = $streamContainer.closest(".widgetcontainer");
-    let streamCount = $streamContainer.children().length;
-    if (streamCount) {
-        $widgetContainer.show();
-    }
-    else {
-        $widgetContainer.hide();
-    }
+		if(filtered.length){
+			widgedContainer.style.display="block"
+		}else{
+			widgedContainer.style.display="none"
+		}
 }
 
 function stream_invokeJsonp(){
