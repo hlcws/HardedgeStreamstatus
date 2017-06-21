@@ -197,7 +197,7 @@ function divCreate(elem,data){
 
 //main func wo das zeug passiert
 function jsonp(data){
-		var widgetContainer=document.getElementById("text-3"); //container which will be hidden if there is no Streams
+		var widgetContainer=document.getElementById(widgetContainerId); //container which will be hidden if there is no Streams
     // hier passiert das meiste
     var allStreams=ordne(data);
     //sortieren nach viewer
