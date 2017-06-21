@@ -1,84 +1,10 @@
 <div id="FANG"></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
-<script type="text/javascript">function tableCreate(data) {
-		//search if exists than destroy
-		var tbl=document.getElementById("streamTbl");
-		if(tbl!=null){
-  		tbl.parentNode.removeChild(tbl);
-		}
-
-		// create elements <table> and a <tbody>
-		var tbl     = document.createElement("table");
-		tbl.id="streamTbl";
-		// top row
-		var row = document.createElement("tr");
-			var cell=createCell("name","th");
-			row.appendChild(cell);
-			var cell=createCell("url","th");
-			row.appendChild(cell);
-			var cell=createCell("status","th");
-			row.appendChild(cell);
-			var cell=createCell("viewers","th");
-			row.appendChild(cell);
-			var cell=createCell("game","th");
-			row.appendChild(cell);
-			var cell=createCell("logo","th");
-			row.appendChild(cell);
-			var cell=createCell("provider","th");
-			row.appendChild(cell);
-		tbl.appendChild(row);
-		
-		// rows with data
-		for (var j = 0; j <data.length; j++) {
-			var row = document.createElement("tr");
-
-			var cell=createCell(data[j].name,"td");
-			row.appendChild(cell);
-			var cell=createCell(data[j].url,"td");
-			row.appendChild(cell);
-			var cell=createCell(data[j].status,"td");
-			row.appendChild(cell);
-			var cell=createCell(data[j].viewers,"td");
-			row.appendChild(cell);
-			var cell=createCell(data[j].game,"td");
-			row.appendChild(cell);
-			var cell=createCell(data[j].logo,"td");
-			row.appendChild(cell);
-			var cell=createCell(data[j].provider,"td");
-			row.appendChild(cell);
-
-			tbl.appendChild(row);
-		}
-		tbl.setAttribute("border", "2");
-		return tbl;
-}
-
-function aCreate(className,href){
-	var a=document.createElement("a");
-		a.className=className;
-		a.href=href;
-		a.target = '_blank';
-	return a;
-}
-
-function createSpanEntryRow(key,value,rowClass,keyClass,valueClass){
-	var spanRow=document.createElement("span");
-		spanRow.className=rowClass;
-	var spanKey=document.createElement("span");
-		spanKey.className=keyClass;
-		spanKey.innerHTML=key;
-	var spanValue=document.createElement("span");
-		spanValue.className=valueClass;
-		spanValue.innerHTML=value;
-	spanRow.appendChild(spanKey);
-	spanRow.appendChild(spanValue);
-	return spanRow;
-}
-
-
+<script type="text/javascript">
+//things to edit
+var widgetContainerId="text-3" //container which will be set to display=none or display=block
 //ANFANG editierbare Funktionen
 
-function regexFilter(data){
+function regexGameFilter(data){
 	var patt = new Array(
 		new RegExp("street fighter", "i"),
 		new RegExp("guilty gear","i"),
@@ -173,6 +99,29 @@ function createSrc(user){
 	return src;
 }
 
+function createLinkToStream(className,href){
+	var a=document.createElement("a");
+		a.className=className;
+		a.href=href;
+		a.target = '_blank';
+	return a;
+}
+
+function createSpanEntryRow(key,value,rowClass,keyClass,valueClass){
+	var spanRow=document.createElement("span");
+		spanRow.className=rowClass;
+	var spanKey=document.createElement("span");
+		spanKey.className=keyClass;
+		spanKey.innerHTML=key;
+	var spanValue=document.createElement("span");
+		spanValue.className=valueClass;
+		spanValue.innerHTML=value;
+	spanRow.appendChild(spanKey);
+	spanRow.appendChild(spanValue);
+	return spanRow;
+}
+
+
 function ordne(data){
 	var collect=new Array();
 	var streams =data.streams;
@@ -191,7 +140,7 @@ function ordne(data){
 	return collect;
 }
 
-function divCreate2(elem,data){
+function divCreate(elem,data){
 	if(elem==null){
 	console.log("Can't find FANG div");
 		return;
@@ -224,7 +173,7 @@ function divCreate2(elem,data){
 	for (var i = 0; i <data.length; i++) {
 		var backGroundImage="url('"+data[i].logo+"')";
 		console.log(backGroundImage);
-		var a_entry=aCreate(class_streamEntry,data[i].url);
+		var a_entry=createLinkToStream(class_streamEntry,data[i].url);
 		var span_entryBody=document.createElement("span");
 			span_entryBody.className=class_streamEntryBody;
 		var span_entryImage=document.createElement("span");
@@ -248,32 +197,30 @@ function divCreate2(elem,data){
 
 //main func wo das zeug passiert
 function jsonp(data){
+		var widgetContainer=document.getElementById(widgetContainerId); //container which will be hidden if there is no Streams
     // hier passiert das meiste
-    var obj=ordne(data);
+    var allStreams=ordne(data);
     //sortieren nach viewer
-    obj.sort(function(a, b) {
+    allStreams.sort(function(a, b) {
         return parseInt(b.viewers) - parseInt(a.viewers) ;
     });
     //die streams werden nochmal gefiltert
-    var filtered=regexFilter(obj);
-    console.log(obj);
-    //var element=document.getElementsByTagName("body")[0];
+    var filteredStreams=regexGameFilter(allStreams);
+		//debug Begin
+		// debug End
+    console.log(allStreams);
+    console.log(filteredStreams.length);
+
     var element=document.getElementById("FANG");
-    divCreate2(element,filtered);
-    //divCreate2(element,obj);
-    //var tbl=tableCreate(filtered);
     console.log("jsonp invoked");
-    
-    // hide "community streams" if there is nothing to display
-    let $streamContainer = $("#streamContainer");
-    let $widgetContainer = $streamContainer.closest(".widgetcontainer");
-    let streamCount = $streamContainer.children().length;
-    if (streamCount) {
-        $widgetContainer.show();
-    }
-    else {
-        $widgetContainer.hide();
-    }
+
+    // create Streams only when existing filteredStreams and hide "community streams" if there is nothing to display
+		if(filteredStreams.length){
+    	divCreate(element,filteredStreams);
+			widgetContainer.style.display="block"
+		}else{
+			widgetContainer.style.display="none"
+		}
 }
 
 function stream_invokeJsonp(){
@@ -292,4 +239,5 @@ function stream_invokeJsonp(){
 
 	console.log("run");
 	stream_invokeJsonp();
-	var fn=window.setInterval(stream_invokeJsonp,30000);</script>
+	var fn=window.setInterval(stream_invokeJsonp,30000);
+</script>
