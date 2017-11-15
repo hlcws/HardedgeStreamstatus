@@ -1,7 +1,6 @@
-<div id="FANG"></div>
 <script type="text/javascript">
 //things to edit
-var widgetContainerId="text-3" //container which will be set to display=none or display=block
+var widgetContainerId="custom_html-2" //container which will be set to display=none or display=block
 //ANFANG editierbare Funktionen
 
 function regexGameFilter(data){
@@ -82,6 +81,7 @@ function username(){
 		,"nthgenmedia"
 		,"taketv"
 		,"clutch23DE"
+,"leveluplive"
 	);
 	return user;
 }
@@ -223,6 +223,34 @@ function jsonp(data){
 			widgetContainer.style.display="none"
 		}
 }
+
+function stream_invokeJsonp(){
+	console.log("stream_invokeJsonp");
+	var script = document.getElementById("streamJsonp");
+	if(script!=null){
+  	script.parentNode.removeChild(script);
+	}
+	var script = document.createElement('script');
+	var user=username();
+	var src=createSrc(user);
+	script.src=src;
+	script.id="streamJsonp";
+	document.getElementsByTagName('head')[0].appendChild(script);
+}
+
+	console.log("run");
+	stream_invokeJsonp();
+	var fn=window.setInterval(stream_invokeJsonp,30000);
+
+
+let $widgetContainer = $streamContainer.closest(".widgetcontainer");
+		let streamCount = $streamContainer.children().length;
+		if (streamCount) {
+			$widgetContainer.show();
+		}
+		else {
+			$widgetContainer.hide();
+		}
 
 function stream_invokeJsonp(){
 	console.log("stream_invokeJsonp");
