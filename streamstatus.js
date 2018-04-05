@@ -1,6 +1,6 @@
 <script type="text/javascript">
 //things to edit
-var widgetContainerId="custom_html-2" //container which will be set to display=none or display=block
+var widgetContainerId="custom_html-2" //target container which will be set to display=none or display=block
 //ANFANG editierbare Funktionen
 
 function regexGameFilter(data){
@@ -82,6 +82,7 @@ function username(){
 		,"taketv"
 		,"clutch23DE"
 		,"jees144"
+		,"bonsaimaister"
 	);
 	return user;
 }
